@@ -27,7 +27,7 @@ module.exports = (req, res) => {
         });
         return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
-            const message = parsedBody.split('=')[1];
+            const message = parsedBody.split('=')[0];
             fs.writeFile('message.txt', message, error => {
                 res.writeHead(302, {
                     'Location': '/'
@@ -36,6 +36,7 @@ module.exports = (req, res) => {
             });
         });
     }
+    
     res.write(`
             <html>
                 <head>
